@@ -1,7 +1,7 @@
 from transformers import pipeline
 
 generator = pipeline(
-    "text2text-generation",
+    task="text2text-generation",
     model="google/flan-t5-small"
 )
 
@@ -23,8 +23,7 @@ def generate_answer(question, context_chunks):
 
     response = generator(
         prompt,
-        max_length=200,
-        do_sample=False
+        max_new_tokens=100
     )
 
     return response[0]["generated_text"]
