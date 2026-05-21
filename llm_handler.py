@@ -16,10 +16,4 @@ def retrieve_relevant_chunks(question, chunks):
 
 def generate_answer(question, relevant_chunk):
 
-    answer = f"""
-    Based on the uploaded PDF:
-
-    {relevant_chunk}
-    """
-
-    return answer
+    return relevant_chunk

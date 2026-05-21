@@ -55,13 +55,13 @@ if uploaded_file is not None:
     relevant_chunk
         )
 
-        st.subheader("Answer")
+    st.subheader("Answer")
 
-        st.write(answer)
+    st.write(answer)
 
-        st.subheader("Retrieved Context")
+    st.subheader("Retrieved Context")
 
-        for chunk in relevant_chunks:
+    for chunk in relevant_chunks:
 
             st.write(chunk)
 
