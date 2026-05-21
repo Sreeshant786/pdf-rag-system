@@ -1,29 +1,25 @@
-from transformers import pipeline
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
-generator = pipeline(
-    task="text2text-generation",
-    model="google/flan-t5-small"
-)
+def retrieve_relevant_chunks(question, chunks):
 
-def generate_answer(question, context_chunks):
+    vectorizer = TfidfVectorizer()
 
-    context = " ".join(context_chunks)
+    vectors = vectorizer.fit_transform(chunks + [question])
 
-    prompt = f"""
-    Answer the question using the context below.
+    similarity = cosine_similarity(vectors[-1], vectors[:-1])
 
-    Context:
-    {context}
+    most_similar_index = similarity.argmax()
 
-    Question:
-    {question}
+    return chunks[most_similar_index]
 
-    Answer:
+
+def generate_answer(question, relevant_chunk):
+
+    answer = f"""
+    Based on the uploaded PDF:
+
+    {relevant_chunk}
     """
 
-    response = generator(
-        prompt,
-        max_new_tokens=100
-    )
-
-    return response[0]["generated_text"]
+    return answer

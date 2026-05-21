@@ -45,16 +45,14 @@ if uploaded_file is not None:
     if question:
 
         # Retrieve relevant chunks
-        relevant_chunks = retrieve_relevant_chunks(
-            question,
-            index,
-            chunks
-        )
+      relevant_chunk = retrieve_relevant_chunks(
+    question,
+    chunks
+)
 
-        # Generate AI answer
-        answer = generate_answer(
-            question,
-            relevant_chunks
+    answer = generate_answer(
+    question,
+    relevant_chunk
         )
 
         st.subheader("Answer")
